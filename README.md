@@ -1,10 +1,14 @@
-# dog
+# Flutter Doraemon
 
-A new Flutter application about dog.
+21天精通Flutter
 
-## Getting Started
+## Content
 
-This project is a starting point for a Flutter application.
+### Day1: 基础组件
+
+- [Widgets](https://api.flutter.dev/flutter/widgets/AbsorbPointer-class.html)
+
+## Just WWant Getting Started ?
 
 A few resources to get you started if this is your first Flutter project:
 

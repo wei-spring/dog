@@ -1,82 +1,65 @@
+import 'package:Doraemon/main_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
 
 void main() {
-  debugPaintSizeEnabled = false; // Set to true for visual layout
-  runApp(MyApp());
+  debugPaintSizeEnabled = false;
+  runApp(MaterialApp(
+    title: 'Navigation Basics',
+    home: HomePage(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  static final showCard = false; // Set to false to show Stack
+class HomePage extends StatelessWidget {
+  static final showCard = false;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter layout demo.',
+      title: 'Flutter api demo.',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Flutter layout demo'),
+          title: Text('21天精通Flutter'),
         ),
-        body: Center(child: showCard ? _buildCard() : _buildStack()),
+        body: Container(
+            child: _buildStack(context),
+            //宽高全屏
+            width: double.infinity,
+            height: double.infinity,
+            //背景
+            color: Colors.white10,
+            //外间距
+            margin: const EdgeInsets.all(16.0),
+            //内间距
+            padding: new EdgeInsets.all(24.0),
+            //定位
+            alignment: Alignment(0.0, 0.0),
+            //旋转
+            transform: new Matrix4.rotationZ(0)),
       ),
     );
   }
 
   // #docregion Card
-  Widget _buildCard() => Container(
-      padding: EdgeInsets.all(20),
-      child: SizedBox(
-        height: 300,
-        child: Card(
-          child: Column(
-            children: [
-              ListTile(
-                title: Text('1625 Main Street',
-                    style: TextStyle(fontWeight: FontWeight.w500)),
-                subtitle: Text('My City, CA 99984'),
-                leading: Icon(
-                  Icons.restaurant_menu,
-                  color: Colors.blue[500],
-                ),
-              ),
-              Divider(),
-              ListTile(
-                title: Text('(408) 555-1212',
-                    style: TextStyle(fontWeight: FontWeight.w500)),
-                leading: Icon(
-                  Icons.contact_phone,
-                  color: Colors.blue[500],
-                ),
-              ),
-              ListTile(
-                title: Text('costa@example.com'),
-                leading: Icon(
-                  Icons.contact_mail,
-                  color: Colors.blue[500],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ));
-
-  // #enddocregion Card
-
-  // #docregion Stack
-  Widget _buildStack() => Stack(
-        alignment: const Alignment(0.9, 0.8),
+  Widget _buildStack(BuildContext context) => InkWell(
+      onTap: () {
+        _toContentPage(context);
+      },
+      child: Stack(
+        alignment: const Alignment(0.0, 0.6),
         children: [
           CircleAvatar(
-            backgroundImage: AssetImage('images/pic.jpg'),
+            backgroundColor: Colors.blue.shade800,
+            backgroundImage: AssetImage('images/flutter_icon.png'),
             radius: 100,
-            child: Text('AH'),
+            child: Text('哆啦A梦'),
           ),
           Container(
             decoration: BoxDecoration(
               color: Colors.black45,
             ),
             child: Text(
-              'Mia B',
+              'Flutter 百宝箱',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -85,6 +68,20 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ],
-      );
-// #enddocregion Stack
+      ));
+
+  //#enddocregion Card
+
+  //跳转目录页面
+  void _toContentPage(BuildContext context) {
+    //可以这样传参
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MainContent()),
+    );
+    //或者这样传参
+//    Navigator.of(context).push(
+//      new MaterialPageRoute<void>(builder: (context) => RandomWords()),
+//    );
+  }
 }
